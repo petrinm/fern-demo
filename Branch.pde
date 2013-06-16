@@ -101,7 +101,7 @@ class Branch {
       prob = 1;
       delay = 200; 
     }
-      
+    
     if(depth < 4 && millis() - lastBranching > delay && points.size() > 3 && prob > random(1)) {
       float aangle = angle;
       if( round(random(0,1)) == 1 )
@@ -119,7 +119,12 @@ class Branch {
     
     // Leaves
     if( millis() - lastLeaf > 200 && points.size() > 3 && 0.2 > random(1)) {
-      Leaf lea = new Leaf( points.get(points.size() - 2) );
+      float max = 0.4;
+      if(depth == 1)
+        max = 0.3;
+      if(depth == 2)
+        max = 0.2;
+      Leaf lea = new Leaf( points.get(points.size() - 2), max);
       leaves.add(lea);
       lastLeaf = millis();
     }
@@ -154,15 +159,13 @@ class Branch {
   }
   
   void draw() {
-    for(Branch branch: branches)
-      branch.draw();
       
     noStroke();
     fill(#492A19);
     
     ArrayList<PVector> wayback = new ArrayList();
     
-    beginShape();
+    beginShape(POLYGON);
     int l = points.size();
     //vertex( points.get(0).x, points.get(0).y );
     for(int i = 0; i < l; i++) {
@@ -192,6 +195,13 @@ class Branch {
     //curveVertex( wayback.get(l-2).x, wayback.get(l-2).y );
     endShape(CLOSE);
     
+    for(Branch branch: branches)
+      branch.draw();
+  }
+  
+  void drawLeaves(){
+    for(Branch branch: branches)
+      branch.drawLeaves();
     for(Leaf leaf: leaves)
       leaf.draw();
   }

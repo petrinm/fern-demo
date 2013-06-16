@@ -59,6 +59,7 @@ class Brancher extends Fxs {
   boolean display() {
     mainBranch.update();
     mainBranch.draw();
+    mainBranch.drawLeaves();
     if(debug)
       mainBranch.drawDebug();
     return true;
