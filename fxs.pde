@@ -108,7 +108,7 @@ class Credits extends Fxs {
     rectMode(CORNERS);
     noStroke();
     
-    fade = min(255, fade+1);
+    fade = min(255, fade+2);
     fill(255,255,255,fade);
 
     scale(30,30);
@@ -123,7 +123,7 @@ class Credits extends Fxs {
       text("Made for Code+Audio+Graphics 2013 party!", 1, 20);
     }
     else if( state == 2 ) {
-      text("Coding/Graphics/Desing: petrinm", 1, 18.8);
+      text("Coding/Graphics/Design: petrinm", 1, 18.8);
       text("Music: project-zero - Still breathing", 1, 20);
     }
     else if( state == 3 ) {
@@ -136,7 +136,7 @@ class Credits extends Fxs {
       text("for organizing the party.", 1, 20);
     }
     
-    if(state < 6 && millis() - startTime > state * 6000) {
+    if(state < 6 && millis() - startTime > state * 5000) {
      fade = 0; state++;
     }
     
