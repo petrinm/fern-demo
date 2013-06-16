@@ -27,16 +27,17 @@ class Leaf {
 
 
 class Flower extends Leaf {
-   PShape c;
+   PShape flower, pedals;
    Flower(PVector _pos) {
-     super(_pos,0.4);
-     c = flowerShape;
+     super(_pos, 0.4);
+     flower = flowerShape;
+     pedals = flower.getChild("pedals");
    }
    
    void draw() {
-     size += 0.01 * (dest - size);
      shapeMode(CENTER);
-     shape( c, pos.x, pos.y, size, size);
+     size += 0.01 * (dest - size);
+     shape(flower, pos.x, pos.y, size, size);
    }
    
 }
