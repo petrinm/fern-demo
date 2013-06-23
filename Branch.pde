@@ -162,37 +162,23 @@ class Branch {
       
     noStroke();
     fill(#492A19);
-    
-    ArrayList<PVector> wayback = new ArrayList();
-    
-    beginShape(POLYGON);
-    int l = points.size();
-    //vertex( points.get(0).x, points.get(0).y );
-    for(int i = 0; i < l; i++) {
+ 
+    beginShape(QUAD_STRIP);
+    for(int i = 0, l = points.size(); i < l; i++) {
       PVector a = points.get(i);
       if(i == l - 1) {
         vertex(a.x, a.y);
-        //vertex(a.x, a.y);
+        vertex(a.x, a.y);
       } else {
         PVector n = PVector.sub(points.get(i+1), a);
         float t = thickness;
-        if(i > l - 20) 
-          t -= (20 - (l-i-1)) * thickness / 20;
+        if(i > l - 15) 
+          t -= (15 - (l-i-1)) * thickness / 15;
         t /= n.mag();
         vertex( a.x+t*n.y, a.y-t*n.x );
-        wayback.add( new PVector( a.x-t*n.y, a.y+t*n.x ) );
+        vertex( a.x-t*n.y, a.y+t*n.x );
       }
     }
-    Collections.reverse(wayback);
-    int r = 0;
-    for(PVector point: wayback) {
-      if( r == 0 )
-        r++;
-      else
-        vertex( point.x, point.y );
-      
-    }
-    //curveVertex( wayback.get(l-2).x, wayback.get(l-2).y );
     endShape(CLOSE);
     
     for(Branch branch: branches)
